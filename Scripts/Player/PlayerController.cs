@@ -6,27 +6,51 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Rigidbody rb;
+    [SerializeField]
+    InGameGameMode gameMode;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        DisableCharacter();
     }
 
-    private void Update()
+    private void Start()
     {
-        //if the user touches the screen
-        if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
+        gameMode = InGameGameMode.GetGameMode();
+    }
+
+    private void FixedUpdate()
+    {
+        if (gameMode.IsGameRunning())
         {
-            //adds force
-            if (Application.isEditor)
-                AddUpwardsForce(3.0f);
-            else
-                AddUpwardsForce(.75f);
+            //if the user touches the screen
+            if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
+            {
+                //adds force
+                if (Application.isEditor)
+                    AddUpwardsForce(100 * Time.fixedDeltaTime);
+                else
+                    AddUpwardsForce(25 * Time.fixedDeltaTime);
+            }
         }
     }
 
+    //Adds an upwards force to the player
     void AddUpwardsForce(float amount)
     {
         rb.AddForce(Vector3.up * amount, ForceMode.Impulse);
     }
+
+    //disables the gravity of the character
+    public void DisableCharacter()
+    {
+        rb.useGravity = false;
+    }
+    //enables the gravity of the character
+    public void EnableCharacter()
+    {
+        rb.useGravity = true;
+    }
+
 }
