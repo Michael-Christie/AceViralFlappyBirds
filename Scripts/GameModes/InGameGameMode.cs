@@ -76,6 +76,7 @@ public class InGameGameMode : MonoBehaviour
         Player.DisableCharacter();
         //set the game as not running
         bGameRunning = false;
+        Time.timeScale = 0;
 
         //Show UI to show Game Over;
     }
