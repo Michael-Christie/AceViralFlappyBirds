@@ -62,6 +62,7 @@ public class InGameGameMode : MonoBehaviour
 
     [Header("Gameplay")]
     public PlayerController Player;
+    public Highscore HighScore;
 
     public void PlayerHitSomething()
     {
@@ -80,6 +81,9 @@ public class InGameGameMode : MonoBehaviour
         //set the game as not running
         bGameRunning = false;
         Time.timeScale = 0;
+
+        if (HighScore.HighScore < distancedTraveled)
+            HighScore.HighScore = (int)distancedTraveled;
 
         //Show UI to show Game Over;
     }

@@ -11,11 +11,13 @@ public class MainMenuWidget : MonoBehaviour
     [SerializeField]
     Text txtHighScore;
 
+    public Highscore Highscore;
+
     private void Awake()
     {
         //adds the play game to the onclick delegate
         btnPlayGame.onClick.AddListener(PlayGame);
-        txtHighScore.text = "High Score:\n0000"; //change this to the new highscore
+        txtHighScore.text = "High Score:\n" + Highscore.HighScore.ToString("000#") ; //change this to the new highscore
     }
 
     void PlayGame()
