@@ -29,7 +29,7 @@ public class WorldGen : MonoBehaviour
     {
         ActiveBackgrounds.Clear();
 
-        for(int i = 0; i < Backgrounds.Length; i++)
+        for (int i = 0; i < Backgrounds.Length; i++)
         {
             ActiveBackgrounds.Enqueue(Backgrounds[i]);
         }
@@ -79,4 +79,14 @@ public class WorldGen : MonoBehaviour
             GenerateNextSection();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        //The player has entered the trigger
+
+        //Moves the trigger area to the next section
+        transform.position = new Vector3(10 * (step - 1), 0, -2);
+        //generates a new section
+        GenerateNextSection();
+
+    }
 }
