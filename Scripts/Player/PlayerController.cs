@@ -8,10 +8,14 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
     [SerializeField]
     InGameGameMode gameMode;
+    Animation anim;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animation>();
+        anim.Play("MegaRampFly");
+
         DisableCharacter();
     }
 

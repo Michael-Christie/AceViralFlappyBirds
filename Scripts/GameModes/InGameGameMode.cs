@@ -35,13 +35,27 @@ public class InGameGameMode : MonoBehaviour
         //enables the player
         Player.EnableCharacter();
 
-        AddDistanceUI();
+        GameHud.GetInstance().OnCountDownFinished();
     }
 
     #region Game Running
     bool bGameRunning = false;
     //public getter for if the game is running
     public bool IsGameRunning() { return bGameRunning; }
+
+    public void PauseGame()
+    {
+        bGameRunning = false;
+        Player.DisableCharacter();
+        Time.timeScale = 0;
+    }
+
+    public void UnPauseGame()
+    {
+        bGameRunning = true;
+        Player.EnableCharacter();
+        Time.timeScale = 1;
+    }
 
     [Header("Gameplay")]
     public PlayerController Player;
@@ -85,14 +99,6 @@ public class InGameGameMode : MonoBehaviour
             //Update some UI.
             OnDistanceUpdate?.Invoke(distancedTraveled);
         }
-    }
-
-    void AddDistanceUI()
-    {
-        DistanceUI.SetActive(true);
-
-        //Canvas Canvas = FindObjectOfType<Canvas>();
-        //Instantiate(DistanceUI, Canvas.transform);
     }
     #endregion
 }
