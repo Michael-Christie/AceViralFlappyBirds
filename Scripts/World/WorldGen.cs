@@ -6,7 +6,7 @@ public class WorldGen : MonoBehaviour
 {
     private static WorldGen instance;
     //public getter for the gamemode instance
-    public static WorldGen GetGameMode() { return instance; }
+    public static WorldGen GetWorld() { return instance; }
 
     private void Awake()
     {
@@ -24,6 +24,7 @@ public class WorldGen : MonoBehaviour
     Queue<GameObject> ActiveBackgrounds = new Queue<GameObject>();
     public GameObject[] Pipes;
     Queue<GameObject> ActivePipes = new Queue<GameObject>();
+    public ParticleSystem ClearedGapParticles;
 
     void SetUpQueues()
     {
@@ -80,6 +81,13 @@ public class WorldGen : MonoBehaviour
         transform.position = new Vector3(10 * (step - 1), 0, -2);
         //generates a new section
         GenerateNextSection();
-
     }
+
+    public void PlayParticles(Vector3 Location)
+    {
+        ClearedGapParticles.transform.position = Location;
+
+        ClearedGapParticles.Play();
+    }
+
 }
