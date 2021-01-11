@@ -31,11 +31,14 @@ public class PlayerController : MonoBehaviour
             //if the user touches the screen
             if (Input.touchCount > 0 || Input.GetMouseButtonDown(0))
             {
+                if(Input.touchCount > 0)
+                {
+                    Touch t = Input.touches[0];
+                    if (t.phase != TouchPhase.Began)
+                        return;
+                }
                 //adds force
-                if (Application.isEditor)
-                    AddUpwardsForce(3);
-                else
-                    AddUpwardsForce(.75f);
+                AddUpwardsForce(3);
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameHud : MonoBehaviour
@@ -34,11 +35,13 @@ public class GameHud : MonoBehaviour
         //add on button click events
         btnPause.onClick.AddListener(PauseGame);
         btnUnpause.onClick.AddListener(UnPauseGame);
+        btnRestart.onClick.AddListener(Restart);
 
         //assing update distance text to the delegate in the game mode
         InGameGameMode GM = InGameGameMode.GetGameMode();
         GM.OnDistanceUpdate += DistanceUpdate;
         txtDistance.gameObject.SetActive(false);
+        btnPause.gameObject.SetActive(false);
 
         PauseMenu.SetActive(false);
     }
@@ -73,4 +76,8 @@ public class GameHud : MonoBehaviour
         btnPause.gameObject.SetActive(true);
     }
 
+    void Restart()
+    {
+        SceneManager.LoadScene(1);
+    }
 }

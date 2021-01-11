@@ -49,25 +49,18 @@ public class WorldGen : MonoBehaviour
         newBackground.transform.position = new Vector3(10 * step, 0, 0);
         ActiveBackgrounds.Enqueue(newBackground);
         //Spawn the pipes to avoid
-        //randomly choose between the first two pipes
         GameObject newPipe = ActivePipes.Dequeue();
         GameObject newPipe1 = ActivePipes.Dequeue();
-        //50/50 chance of spawning either pipe
-        if (Random.value > .5f)
-        {
-            //add the non chosen pipe to the queue first
-            ActivePipes.Enqueue(newPipe);
-            newPipe = newPipe1;
-        }
-        else
-            ActivePipes.Enqueue(newPipe1);
 
         float yValue = Random.Range(-.6f, .6f);
-        float xValue = Random.Range(-2.5f, 2.5f);
+        float xValue = Random.Range(-1.5f, 1.5f);
         newPipe.transform.position = new Vector3(10 * step + xValue, yValue, -2.5f);
 
-        //then add the last pipe to the queue
+        newPipe1.transform.position = new Vector3(10 * step + xValue + 5, yValue, -2.5f);
+
+        //then add the pipes back to the list
         ActivePipes.Enqueue(newPipe);
+        ActivePipes.Enqueue(newPipe1);
         //increament the step away from start point
         step++;
     }

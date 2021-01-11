@@ -21,6 +21,9 @@ public class InGameGameMode : MonoBehaviour
     //Tempoary start game
     private void Start()
     {
+        //resests time scale
+        Time.timeScale = 1;
+
         //if no player set, find one
         if (!Player)
             Player = FindObjectOfType<PlayerController>();
