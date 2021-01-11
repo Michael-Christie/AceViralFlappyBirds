@@ -30,10 +30,12 @@ public class InGameGameMode : MonoBehaviour
     //Tempoary start game
     IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(3.0f);
+        yield return new WaitForSeconds(4.0f);
         bGameRunning = true;
         //enables the player
         Player.EnableCharacter();
+
+        AddDistanceUI();
     }
 
     #region Game Running
@@ -66,6 +68,12 @@ public class InGameGameMode : MonoBehaviour
     #endregion
 
     #region Distance Stuff
+    public delegate void FOnDistanceUpdate(float distance);
+    public FOnDistanceUpdate OnDistanceUpdate;
+
+    [Header("UI")]
+    public GameObject DistanceUI;
+
     float distancedTraveled = 0;
     //Setter for distance travelled
     public void AddDistanceTraveled(float value)
@@ -75,8 +83,16 @@ public class InGameGameMode : MonoBehaviour
         {
             distancedTraveled += value;
             //Update some UI.
-
+            OnDistanceUpdate?.Invoke(distancedTraveled);
         }
+    }
+
+    void AddDistanceUI()
+    {
+        DistanceUI.SetActive(true);
+
+        //Canvas Canvas = FindObjectOfType<Canvas>();
+        //Instantiate(DistanceUI, Canvas.transform);
     }
     #endregion
 }

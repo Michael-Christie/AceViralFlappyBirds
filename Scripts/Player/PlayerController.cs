@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         gameMode = InGameGameMode.GetGameMode();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (gameMode.IsGameRunning())
         {
@@ -29,9 +29,9 @@ public class PlayerController : MonoBehaviour
             {
                 //adds force
                 if (Application.isEditor)
-                    AddUpwardsForce(100 * Time.fixedDeltaTime);
+                    AddUpwardsForce(3);
                 else
-                    AddUpwardsForce(25 * Time.fixedDeltaTime);
+                    AddUpwardsForce(.75f);
             }
         }
     }
