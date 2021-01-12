@@ -61,12 +61,12 @@ public class InGameGameMode : MonoBehaviour
     //Reasons for the player to lose the game
     public void PlayerHitSomething()
     {
-        GameOver("Hit An Object!");
+        GameOver("You Hit An Object!");
     }
 
     public void PlayerFellOutWorld()
     {
-        GameOver("Fell Out Of The World!");
+        GameOver("You Fell Out The World!");
     }
     //Shows game over to the player.
     void GameOver(string Reason)
@@ -81,6 +81,9 @@ public class InGameGameMode : MonoBehaviour
             HighScore.HighScore = (int)distancedTraveled;
 
         //Show UI to show Game Over;
+        GameHud Hud = GameHud.GetInstance();
+        Hud.ShowGameOver(Reason, (int)distancedTraveled, HighScore.HighScore);
+
     }
     #endregion
 

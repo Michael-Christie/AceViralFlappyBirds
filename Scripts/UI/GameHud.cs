@@ -29,6 +29,11 @@ public class GameHud : MonoBehaviour
     Button btnRestart;
     [SerializeField]
     Button btnUnpause;
+    [Header("Game Over")]
+    [SerializeField]
+    GameObject GameOverMenu;
+    [SerializeField]
+    GameOverWidget gameOverWidget;
 
     void Start()
     {
@@ -44,6 +49,7 @@ public class GameHud : MonoBehaviour
         txtDistance.gameObject.SetActive(false);
         btnPause.gameObject.SetActive(false);
         PauseMenu.SetActive(false);
+        GameOverMenu.SetActive(false);
     }
 
     //Deals with showing UI after the count down has finished
@@ -82,5 +88,14 @@ public class GameHud : MonoBehaviour
     void Restart()
     {
         SceneManager.LoadScene(1);
+    }
+
+    public void ShowGameOver(string Reason, int score, int highScore)
+    {
+        btnPause.gameObject.SetActive(false);
+        txtDistance.gameObject.SetActive(false);
+
+        gameOverWidget.SetUp(Reason, score, highScore);
+        GameOverMenu.SetActive(true);
     }
 }

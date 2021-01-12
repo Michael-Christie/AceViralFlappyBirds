@@ -61,7 +61,7 @@ public class WorldGen : MonoBehaviour
             //randomly chose a height
             float yValue = Random.Range(-1.2f, 1.2f);
             //move the pipe object to the new location
-            newPipe.transform.position = new Vector3(5 * step * 2 + i , yValue, -2.5f);
+            newPipe.transform.position = new Vector3(5 * (step * 2 + i) , yValue, -2.5f);
             //add it back to the end of the queue
             ActivePipes.Enqueue(newPipe);
         }
