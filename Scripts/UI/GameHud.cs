@@ -18,7 +18,7 @@ public class GameHud : MonoBehaviour
         instance = this;
     }
 
-    [Header("In Game UI"), SerializeField]
+    [Header("InGame UI"), SerializeField]
     Button btnPause;
     [SerializeField]
     Text txtDistance;
@@ -37,12 +37,12 @@ public class GameHud : MonoBehaviour
         btnUnpause.onClick.AddListener(UnPauseGame);
         btnRestart.onClick.AddListener(Restart);
 
-        //assing update distance text to the delegate in the game mode
+        //assigning update distance text to the delegate in the game mode
         InGameGameMode GM = InGameGameMode.GetGameMode();
         GM.OnDistanceUpdate += DistanceUpdate;
+        //hides and shows UI objects
         txtDistance.gameObject.SetActive(false);
         btnPause.gameObject.SetActive(false);
-
         PauseMenu.SetActive(false);
     }
 
@@ -60,6 +60,7 @@ public class GameHud : MonoBehaviour
     //pauses the game
     void PauseGame()
     {
+        //Pause the game from the gamemode
         InGameGameMode.GetGameMode().PauseGame();
         //hides objects
         btnPause.gameObject.SetActive(false);
@@ -69,6 +70,7 @@ public class GameHud : MonoBehaviour
     //unPauses the game
     void UnPauseGame()
     {
+        //Unpauses the gamemode
         InGameGameMode.GetGameMode().UnPauseGame();
         //hides objects
         PauseMenu.SetActive(false);
@@ -76,6 +78,7 @@ public class GameHud : MonoBehaviour
         btnPause.gameObject.SetActive(true);
     }
 
+    //Reloads the scene
     void Restart()
     {
         SceneManager.LoadScene(1);

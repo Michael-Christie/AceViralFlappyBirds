@@ -11,6 +11,9 @@ public class InGameGameMode : MonoBehaviour
 
     private void Awake()
     {
+        //resests time scale
+        Time.timeScale = 1;
+
         //sets up the gamemode instance
         if (instance)
             Destroy(this);
@@ -18,22 +21,17 @@ public class InGameGameMode : MonoBehaviour
     }
     #endregion
 
-    //Tempoary start game
-    private void Start()
-    {
-        //resests time scale
-        Time.timeScale = 1;
+    #region Game Running
+    bool bGameRunning = false;
+    //public getter for if the game is running
+    public bool IsGameRunning() { return bGameRunning; }
 
+    public void StartGame()
+    {
         //if no player set, find one
         if (!Player)
             Player = FindObjectOfType<PlayerController>();
 
-        StartCoroutine(StartGame());
-    }
-    //Tempoary start game
-    IEnumerator StartGame()
-    {
-        yield return new WaitForSeconds(4.0f);
         bGameRunning = true;
         //enables the player
         Player.EnableCharacter();
@@ -41,18 +39,14 @@ public class InGameGameMode : MonoBehaviour
         GameHud.GetInstance().OnCountDownFinished();
     }
 
-    #region Game Running
-    bool bGameRunning = false;
-    //public getter for if the game is running
-    public bool IsGameRunning() { return bGameRunning; }
-
+    //Stops movement inside of the game
     public void PauseGame()
     {
         bGameRunning = false;
         Player.DisableCharacter();
         Time.timeScale = 0;
     }
-
+    //Enables movement inside the game
     public void UnPauseGame()
     {
         bGameRunning = true;
@@ -64,6 +58,7 @@ public class InGameGameMode : MonoBehaviour
     public PlayerController Player;
     public Highscore HighScore;
 
+    //Reasons for the player to lose the game
     public void PlayerHitSomething()
     {
         GameOver("Hit An Object!");
@@ -73,7 +68,7 @@ public class InGameGameMode : MonoBehaviour
     {
         GameOver("Fell Out Of The World!");
     }
-
+    //Shows game over to the player.
     void GameOver(string Reason)
     {
         //Disable the player from moving

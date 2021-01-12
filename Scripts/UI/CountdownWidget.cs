@@ -13,16 +13,13 @@ public class CountdownWidget : MonoBehaviour
 
     private void Start()
     {
-        StartCountDown();
-    }
-
-    void StartCountDown()
-    {
         StartCoroutine("CountDown");
     }
 
+    //The animation for fading text in and out
     IEnumerator CountDown()
     {
+        yield return new WaitForSeconds(1.0f);
         txtCountDown.text = "3";
         animator.SetTrigger("PulseText");
         yield return new WaitForSeconds(1.0f);
@@ -34,7 +31,9 @@ public class CountdownWidget : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         txtCountDown.text = "GO!";
         animator.SetTrigger("PulseText");
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(.5f);
+        InGameGameMode.GetGameMode().StartGame();
+        yield return new WaitForSeconds(1f);
         //hid the go, destroy the UI;
         Destroy(gameObject);
     }

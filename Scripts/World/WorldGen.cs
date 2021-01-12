@@ -26,56 +26,54 @@ public class WorldGen : MonoBehaviour
     Queue<GameObject> ActivePipes = new Queue<GameObject>();
     public ParticleSystem ClearedGapParticles;
 
+    //the distance from the start
+    int step = 3;
+
     void SetUpQueues()
     {
+        //queues the backgrounds
         ActiveBackgrounds.Clear();
-
         for (int i = 0; i < Backgrounds.Length; i++)
         {
             ActiveBackgrounds.Enqueue(Backgrounds[i]);
         }
-
+        //queues the pipes
+        ActivePipes.Clear();
         for (int i = 0; i < Pipes.Length; i++)
         {
             ActivePipes.Enqueue(Pipes[i]);
         }
     }
 
-    int step = 3;
-
     void GenerateNextSection()
     {
         //Spawn the background
+
         GameObject newBackground = ActiveBackgrounds.Dequeue();
         newBackground.transform.position = new Vector3(10 * step, 0, 0);
         ActiveBackgrounds.Enqueue(newBackground);
         //Spawn the pipes to avoid
-        GameObject newPipe = ActivePipes.Dequeue();
-        GameObject newPipe1 = ActivePipes.Dequeue();
 
-        float yValue = Random.Range(-.6f, .6f);
-        float xValue = Random.Range(-1.5f, 1.5f);
-        newPipe.transform.position = new Vector3(10 * step + xValue, yValue, -2.5f);
+        for (int i = 0; i < 2; i++)
+        {
+            //dequeue the first pipe object
+            GameObject newPipe = ActivePipes.Dequeue();
+            //randomly chose a height
+            float yValue = Random.Range(-1.2f, 1.2f);
+            //move the pipe object to the new location
+            newPipe.transform.position = new Vector3(5 * step * 2 + i , yValue, -2.5f);
+            //add it back to the end of the queue
+            ActivePipes.Enqueue(newPipe);
+        }
 
-        newPipe1.transform.position = new Vector3(10 * step + xValue + 5, yValue, -2.5f);
-
-        //then add the pipes back to the list
-        ActivePipes.Enqueue(newPipe);
-        ActivePipes.Enqueue(newPipe1);
         //increament the step away from start point
         step++;
     }
 
-    //temp
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            GenerateNextSection();
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        //The player has entered the trigger
+        //if its not the player... return;
+        if (!other.gameObject.GetComponent<PlayerController>()) return;
 
         //Moves the trigger area to the next section
         transform.position = new Vector3(10 * (step - 1), 0, -2);
@@ -83,6 +81,7 @@ public class WorldGen : MonoBehaviour
         GenerateNextSection();
     }
 
+    //Plays the particle system at a location...
     public void PlayParticles(Vector3 Location)
     {
         ClearedGapParticles.transform.position = Location;
