@@ -57,6 +57,7 @@ public class InGameGameMode : MonoBehaviour
     [Header("Gameplay")]
     public PlayerController Player;
     public Highscore HighScore;
+    public ParticleSystem beatHighScore;
 
     //Reasons for the player to lose the game
     public void PlayerHitSomething()
@@ -72,10 +73,10 @@ public class InGameGameMode : MonoBehaviour
     void GameOver(string Reason)
     {
         //Disable the player from moving
-        Player.DisableCharacter();
+        //Player.DisableCharacter();
         //set the game as not running
         bGameRunning = false;
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
 
         if (HighScore.HighScore < distancedTraveled)
             HighScore.HighScore = (int)distancedTraveled;
@@ -92,7 +93,9 @@ public class InGameGameMode : MonoBehaviour
     public FOnDistanceUpdate OnDistanceUpdate;
 
     [Header("UI")]
-    public GameObject DistanceUI;
+    public Animator DistanceUIAnimator;
+
+    bool bHasBeatenRecord;
 
     float distancedTraveled = 0;
     //Setter for distance travelled
@@ -102,6 +105,14 @@ public class InGameGameMode : MonoBehaviour
         if (value > 0)
         {
             distancedTraveled += value;
+
+            if(!bHasBeatenRecord && distancedTraveled > HighScore.HighScore)
+            {
+                //you beat your record woo!
+                beatHighScore.Play();
+                bHasBeatenRecord = true;
+                DistanceUIAnimator.SetTrigger("PopText");
+            }
             //Update some UI.
             OnDistanceUpdate?.Invoke(distancedTraveled);
         }

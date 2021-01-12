@@ -17,6 +17,8 @@ public class HitPipes : MonoBehaviour
             InGameGameMode.GetGameMode()?.PlayerHitSomething();
             //Get the sound Manager and play the hit sound
             SoundManager.GetSoundManager()?.PlayPlayerHit();
+
+            FindObjectOfType<ScreenShake>()?.SetShakerTime(.4f);
         }
         
     }
