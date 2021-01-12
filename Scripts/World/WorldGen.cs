@@ -22,7 +22,7 @@ public class WorldGen : MonoBehaviour
     [Header("Object Pool")]
     public GameObject[] Backgrounds;
     Queue<GameObject> ActiveBackgrounds = new Queue<GameObject>();
-    public GameObject[] Pipes;
+    public GameObject[] Obsticles;
     Queue<GameObject> ActivePipes = new Queue<GameObject>();
     public ParticleSystem ClearedGapParticles;
 
@@ -39,9 +39,9 @@ public class WorldGen : MonoBehaviour
         }
         //queues the pipes
         ActivePipes.Clear();
-        for (int i = 0; i < Pipes.Length; i++)
+        for (int i = 0; i < Obsticles.Length; i++)
         {
-            ActivePipes.Enqueue(Pipes[i]);
+            ActivePipes.Enqueue(Obsticles[i]);
         }
     }
 

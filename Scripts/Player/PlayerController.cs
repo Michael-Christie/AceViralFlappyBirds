@@ -43,18 +43,19 @@ public class PlayerController : MonoBehaviour
                         return;
                 }
                 //adds force to the player
-                AddUpwardsForce(3);
+                //AddUpwardsForce(3);
+                AddForce(Vector3.up, 3);
 
                 SoundManager.GetSoundManager()?.PlayPlayerJumped();
             }
         }
     }
 
-    //Adds an upwards force to the player
-    void AddUpwardsForce(float amount)
-    {
-        rb.AddForce(Vector3.up * amount, ForceMode.Impulse);
-    }
+    ////Adds an upwards force to the player
+    //void AddUpwardsForce(float amount)
+    //{
+    //    rb.AddForce(Vector3.up * amount, ForceMode.Impulse);
+    //}
 
     //disables the gravity of the character
     public void DisableCharacter()
@@ -65,6 +66,11 @@ public class PlayerController : MonoBehaviour
     public void EnableCharacter()
     {
         rb.useGravity = true;
+    }
+
+    public void AddForce(Vector3 direction, float amount)
+    {
+        rb.AddForce(direction * amount, ForceMode.Impulse);
     }
 
 }
