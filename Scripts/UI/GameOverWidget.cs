@@ -26,6 +26,8 @@ public class GameOverWidget : MonoBehaviour
 
     void ToMenu()
     {
+        SoundManager.GetSoundManager()?.PlayButtonPressed();
+        
         SceneManager.LoadScene(0);
     }
 }

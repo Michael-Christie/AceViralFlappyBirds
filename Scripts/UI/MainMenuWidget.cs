@@ -27,6 +27,8 @@ public class MainMenuWidget : MonoBehaviour
     //loads the game scene when the button is clicked
     void PlayGame()
     {
+        SoundManager.GetSoundManager()?.PlayButtonPressed();
+
         SceneManager.LoadScene(1);
     }
 }

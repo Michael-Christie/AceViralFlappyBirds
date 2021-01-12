@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
                 }
                 //adds force to the player
                 AddUpwardsForce(3);
+
+                SoundManager.GetSoundManager()?.PlayPlayerJumped();
             }
         }
     }

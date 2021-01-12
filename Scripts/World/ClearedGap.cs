@@ -10,6 +10,8 @@ public class ClearedGap : MonoBehaviour
         PlayerController PC = other.gameObject.GetComponent<PlayerController>();
         if (!PC) return;
 
-        WorldGen.GetWorld().PlayParticles(PC.transform.position);
+        WorldGen.GetWorld()?.PlayParticles(PC.transform.position);
+
+        SoundManager.GetSoundManager()?.PlayClearedPipe();
     }
 }

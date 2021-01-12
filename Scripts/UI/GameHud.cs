@@ -67,26 +67,31 @@ public class GameHud : MonoBehaviour
     void PauseGame()
     {
         //Pause the game from the gamemode
-        InGameGameMode.GetGameMode().PauseGame();
+        InGameGameMode.GetGameMode()?.PauseGame();
         //hides objects
         btnPause.gameObject.SetActive(false);
         //shows objects
         PauseMenu.SetActive(true);
+
+        SoundManager.GetSoundManager()?.PlayButtonPressed();
     }
     //unPauses the game
     void UnPauseGame()
     {
         //Unpauses the gamemode
-        InGameGameMode.GetGameMode().UnPauseGame();
+        InGameGameMode.GetGameMode()?.UnPauseGame();
         //hides objects
         PauseMenu.SetActive(false);
         //shows objects
         btnPause.gameObject.SetActive(true);
+
+        SoundManager.GetSoundManager()?.PlayButtonPressed();
     }
 
     //Reloads the scene
     void Restart()
     {
+        SoundManager.GetSoundManager()?.PlayButtonPressed();
         SceneManager.LoadScene(1);
     }
 
