@@ -48,10 +48,14 @@ public class WorldGen : MonoBehaviour
     void GenerateNextSection()
     {
         //Spawn the background
-
-        GameObject newBackground = ActiveBackgrounds.Dequeue();
-        newBackground.transform.position = new Vector3(10 * step, 0, 0);
-        ActiveBackgrounds.Enqueue(newBackground);
+        //if the step number is an even
+        if ((step & 1) == 0)
+        {
+            //move the background along
+            GameObject newBackground = ActiveBackgrounds.Dequeue();
+            newBackground.transform.position = new Vector3(10 * step, 0, 0);
+            ActiveBackgrounds.Enqueue(newBackground);
+        }
         //Spawn the pipes to avoid
 
         for (int i = 0; i < 2; i++)
