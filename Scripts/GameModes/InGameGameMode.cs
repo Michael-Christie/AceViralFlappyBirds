@@ -22,16 +22,22 @@ public class InGameGameMode : MonoBehaviour
     #endregion
 
     #region Game Running
+    private void Start()
+    {
+        //add the hat to the player
+        //if no player set, find one
+        if (!Player)
+            Player = FindObjectOfType<PlayerController>();
+
+        Player.AddHat(HighScore.PlayerHat);
+    }
+
     bool bGameRunning = false;
     //public getter for if the game is running
     public bool IsGameRunning() { return bGameRunning; }
 
     public void StartGame()
     {
-        //if no player set, find one
-        if (!Player)
-            Player = FindObjectOfType<PlayerController>();
-
         bGameRunning = true;
         //enables the player
         Player.EnableCharacter();
@@ -56,7 +62,7 @@ public class InGameGameMode : MonoBehaviour
 
     [Header("Gameplay")]
     public PlayerController Player;
-    public Highscore HighScore;
+    public PlayInfoObject HighScore;
     public ParticleSystem beatHighScore;
 
     //Reasons for the player to lose the game

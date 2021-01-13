@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     InGameGameMode gameMode;
     Animation anim;
+    [SerializeField]
+    Transform HatLocation;
 
     private void Awake()
     {
@@ -65,6 +67,11 @@ public class PlayerController : MonoBehaviour
     public void AddForce(Vector3 direction, float amount = 1)
     {
         rb.AddForce(direction * amount, ForceMode.Impulse);
+    }
+    //adds a hat to the player
+    public void AddHat(GameObject hat)
+    {
+        Instantiate(hat, HatLocation.position, Quaternion.identity, HatLocation);
     }
 
 }
