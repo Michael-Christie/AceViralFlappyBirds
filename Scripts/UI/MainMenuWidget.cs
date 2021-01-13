@@ -52,6 +52,7 @@ public class MainMenuWidget : MonoBehaviour
 
     void ShowHatMenu()
     {
+        SoundManager.GetSoundManager()?.PlayButtonPressed();
         //show the hat menu
         MainMenu.SetActive(false);
         HatMenu.SetActive(true);
@@ -61,6 +62,7 @@ public class MainMenuWidget : MonoBehaviour
 
     void ToMenu()
     {
+        SoundManager.GetSoundManager()?.PlayButtonPressed();
         //show the main menu
         MainMenu.SetActive(true);
         HatMenu.SetActive(false);

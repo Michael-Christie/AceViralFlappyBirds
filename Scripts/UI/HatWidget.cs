@@ -59,8 +59,11 @@ public class HatWidget : MonoBehaviour
     void onHatPressed()
     {
         //set the selected hat to this hat
-        if(bIsUnlocked)
-         FindObjectOfType<MainMenuWidget>().SelectNewHat(Hat);
+        if (bIsUnlocked)
+        {
+            FindObjectOfType<MainMenuWidget>().SelectNewHat(Hat);
+            SoundManager.GetSoundManager()?.PlayButtonPressed();
+        }
     }
 
 }

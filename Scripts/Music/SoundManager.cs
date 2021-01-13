@@ -35,6 +35,10 @@ public class SoundManager : MonoBehaviour
 
     [Header("UI"), SerializeField]
     AudioClip ButtonConfrimPress;
+    [SerializeField]
+    AudioClip CountdownBeep;
+    [SerializeField]
+    AudioClip GameStartSound;
 
     //The player jumped sound effect.
     public void PlayPlayerJumped() { SFXsource.PlayOneShot(PlayerJumpSound); }
@@ -47,6 +51,10 @@ public class SoundManager : MonoBehaviour
 
     //The player pressed a button
     public void PlayButtonPressed() { SFXsource.PlayOneShot(ButtonConfrimPress); }
+
+    public void PlayCountDownBeep() { SFXsource.PlayOneShot(CountdownBeep); }
+
+    public void PlayGameStartSound() { SFXsource.PlayOneShot(GameStartSound); }
 
 
 }
