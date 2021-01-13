@@ -28,7 +28,7 @@ public class InGameGameMode : MonoBehaviour
         //if no player set, find one
         if (!Player)
             Player = FindObjectOfType<PlayerController>();
-
+        //add the hat
         Player.AddHat(HighScore.PlayerHat);
     }
 

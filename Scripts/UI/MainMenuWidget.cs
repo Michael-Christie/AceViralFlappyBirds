@@ -44,6 +44,7 @@ public class MainMenuWidget : MonoBehaviour
     //loads the game scene when the button is clicked
     void PlayGame()
     {
+
         SoundManager.GetSoundManager()?.PlayButtonPressed();
 
         SceneManager.LoadScene(1);
@@ -51,29 +52,33 @@ public class MainMenuWidget : MonoBehaviour
 
     void ShowHatMenu()
     {
+        //show the hat menu
         MainMenu.SetActive(false);
         HatMenu.SetActive(true);
+        //updat the hat menu content
         UpdateHatMenu();
     }
 
     void ToMenu()
     {
+        //show the main menu
         MainMenu.SetActive(true);
         HatMenu.SetActive(false);
     }
 
     public void SelectNewHat(GameObject hat)
     {
+        //set the new hat in the player info SO
         PlayerInfo.PlayerHat = hat;
+        //updat hat menu contents
         UpdateHatMenu();
     }
 
     void UpdateHatMenu()
     {
+        //for each hat, update its content
         foreach(HatWidget h in HatWidgets)
         {
-            Debug.Log(h.Hat + " " + PlayerInfo.PlayerHat);
-            Debug.Log(h.Hat == PlayerInfo.PlayerHat);
             h.UpdateHat(h.Hat == PlayerInfo.PlayerHat, PlayerInfo.HighScore);
         }
     }

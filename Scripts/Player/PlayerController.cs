@@ -68,10 +68,15 @@ public class PlayerController : MonoBehaviour
     {
         rb.AddForce(direction * amount, ForceMode.Impulse);
     }
+
     //adds a hat to the player
     public void AddHat(GameObject hat)
     {
-        Instantiate(hat, HatLocation.position, Quaternion.identity, HatLocation);
+        //if the hat exists spawn it on the players head
+        if (hat)
+        {
+            Instantiate(hat, HatLocation.position, Quaternion.identity, HatLocation);
+        }
     }
 
 }
