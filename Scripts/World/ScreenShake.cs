@@ -9,10 +9,10 @@ public class ScreenShake : MonoBehaviour
 
     private void Awake()
     {
+        //set the default starting location, aka 0 0 -10
         startingLocation = transform.localPosition;
     }
 
-    // Update is called once per frame
     void Update()
     {
         //if there is shaking to do
@@ -34,6 +34,7 @@ public class ScreenShake : MonoBehaviour
         }
     }
 
+    //public method to start camera shake off
     public void SetShakerTime(float duration)
     {
         ShakeDuration = duration;

@@ -15,6 +15,7 @@ public class GameOverWidget : MonoBehaviour
 
     private void Start()
     {
+        //add the button click event
         btnToMenu.onClick.AddListener(ToMenu);
     }
 
@@ -26,8 +27,9 @@ public class GameOverWidget : MonoBehaviour
 
     void ToMenu()
     {
+        //play the button pressing sound if sound manager exists
         SoundManager.GetSoundManager()?.PlayButtonPressed();
-        
+        //load the main menu
         SceneManager.LoadScene(0);
     }
 }

@@ -55,6 +55,7 @@ public class GameHud : MonoBehaviour
     //Deals with showing UI after the count down has finished
     public void OnCountDownFinished()
     {
+        //set UI elements to visable
         txtDistance.gameObject.SetActive(true);
         btnPause.gameObject.SetActive(true);
     }
@@ -72,7 +73,7 @@ public class GameHud : MonoBehaviour
         btnPause.gameObject.SetActive(false);
         //shows objects
         PauseMenu.SetActive(true);
-
+        //plays the button sound is sound manager exists.
         SoundManager.GetSoundManager()?.PlayButtonPressed();
     }
     //unPauses the game
@@ -84,23 +85,27 @@ public class GameHud : MonoBehaviour
         PauseMenu.SetActive(false);
         //shows objects
         btnPause.gameObject.SetActive(true);
-
+        //plays the button sound is sound manager exists.
         SoundManager.GetSoundManager()?.PlayButtonPressed();
     }
 
     //Reloads the scene
     void Restart()
     {
+        //plays the button sound is sound manager exists.
         SoundManager.GetSoundManager()?.PlayButtonPressed();
+        //loads the game again.
         SceneManager.LoadScene(1);
     }
 
     public void ShowGameOver(string Reason, int score, int highScore)
     {
+        //Hide UI layers
         btnPause.gameObject.SetActive(false);
         txtDistance.gameObject.SetActive(false);
-
+        //set the game over state up
         gameOverWidget.SetUp(Reason, score, highScore);
+        //show game over UI
         GameOverMenu.SetActive(true);
     }
 }

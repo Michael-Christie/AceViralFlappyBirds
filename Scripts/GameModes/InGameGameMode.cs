@@ -72,12 +72,10 @@ public class InGameGameMode : MonoBehaviour
     //Shows game over to the player.
     void GameOver(string Reason)
     {
-        //Disable the player from moving
-        //Player.DisableCharacter();
         //set the game as not running
         bGameRunning = false;
-        //Time.timeScale = 0;
 
+        //if the players high score is lower then their current score, set the new high score
         if (HighScore.HighScore < distancedTraveled)
             HighScore.HighScore = (int)distancedTraveled;
 
@@ -89,14 +87,15 @@ public class InGameGameMode : MonoBehaviour
     #endregion
 
     #region Distance Stuff
+    //delegates for when total distance is updated
     public delegate void FOnDistanceUpdate(float distance);
     public FOnDistanceUpdate OnDistanceUpdate;
-
+    //the animator to pop the distance text
     [Header("UI")]
     public Animator DistanceUIAnimator;
-
+    //private bool to run the pop text once per game.
     bool bHasBeatenRecord;
-
+    //current distance travelled.
     float distancedTraveled = 0;
     //Setter for distance travelled
     public void AddDistanceTraveled(float value)

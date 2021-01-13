@@ -23,7 +23,7 @@ public class WorldGen : MonoBehaviour
     public GameObject[] Backgrounds;
     Queue<GameObject> ActiveBackgrounds = new Queue<GameObject>();
     public GameObject[] Obsticles;
-    Queue<GameObject> ActivePipes = new Queue<GameObject>();
+    Queue<GameObject> ActiveObsticles = new Queue<GameObject>();
     public ParticleSystem ClearedGapParticles;
 
     //the distance from the start
@@ -38,10 +38,10 @@ public class WorldGen : MonoBehaviour
             ActiveBackgrounds.Enqueue(Backgrounds[i]);
         }
         //queues the pipes
-        ActivePipes.Clear();
+        ActiveObsticles.Clear();
         for (int i = 0; i < Obsticles.Length; i++)
         {
-            ActivePipes.Enqueue(Obsticles[i]);
+            ActiveObsticles.Enqueue(Obsticles[i]);
         }
     }
 
@@ -56,18 +56,18 @@ public class WorldGen : MonoBehaviour
             newBackground.transform.position = new Vector3(10 * step, 0, 0);
             ActiveBackgrounds.Enqueue(newBackground);
         }
-        //Spawn the pipes to avoid
 
+        //Spawn the obsticles to avoid
         for (int i = 0; i < 2; i++)
         {
-            //dequeue the first pipe object
-            GameObject newPipe = ActivePipes.Dequeue();
+            //dequeue the first object
+            GameObject newObsticle = ActiveObsticles.Dequeue();
             //randomly chose a height
             float yValue = Random.Range(-1.2f, 1.2f);
-            //move the pipe object to the new location
-            newPipe.transform.position = new Vector3(5 * (step * 2 + i) , yValue, -2.5f);
+            //move the object to the new location (step * 2 + i = 2 objects per background peice)
+            newObsticle.transform.position = new Vector3(5 * (step * 2 + i) , yValue, -2.5f);
             //add it back to the end of the queue
-            ActivePipes.Enqueue(newPipe);
+            ActiveObsticles.Enqueue(newObsticle);
         }
 
         //increament the step away from start point
@@ -88,8 +88,8 @@ public class WorldGen : MonoBehaviour
     //Plays the particle system at a location...
     public void PlayParticles(Vector3 Location)
     {
+        //move the particle system to the new location and play it
         ClearedGapParticles.transform.position = Location;
-
         ClearedGapParticles.Play();
     }
 
